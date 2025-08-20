@@ -1,7 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { authApi } from '../api';
+import { useAuth } from '../store/auth';
 
 export default function Login({ onLoggedIn }: { onLoggedIn: () => void }) {
+  const navigate = useNavigate();
+  const auth = useAuth();
   const [email, setEmail] = useState('demo@local');
   const [password, setPassword] = useState('Pass123$');
   const [error, setError] = useState<string | null>(null);
@@ -10,8 +14,10 @@ export default function Login({ onLoggedIn }: { onLoggedIn: () => void }) {
     e.preventDefault();
     setError(null);
     try {
-      await authApi.login(email, password);
+      const t = await authApi.login(email, password);
+      auth.setTokens({ accessToken: t.accessToken, refreshToken: t.refreshToken, email });
       onLoggedIn();
+      navigate(auth.lastRoute ?? '/dashboard');
     } catch {
       setError('Login failed');
     }

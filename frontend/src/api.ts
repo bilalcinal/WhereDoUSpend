@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useAuth } from './store/auth';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5002/api';
 const ORIGIN_URL = API_URL.replace(/\/api\/?$/, '');
@@ -30,7 +31,26 @@ export function setTokens(tokens: { accessToken: string; refreshToken: string })
     accessToken = tokens.accessToken;
     refreshToken = tokens.refreshToken;
     api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+    // also mirror to zustand store
+    try {
+        useAuth.getState().setTokens({ accessToken, refreshToken });
+    } catch { }
 }
+
+// attach access token from store before requests
+api.interceptors.request.use((config) => {
+    if (!accessToken) {
+        try {
+            const { accessToken: at } = useAuth.getState();
+            if (at) {
+                accessToken = at;
+                config.headers = config.headers ?? {};
+                (config.headers as any)['Authorization'] = `Bearer ${at}`;
+            }
+        } catch { }
+    }
+    return config;
+});
 
 api.interceptors.response.use(
     (res) => res,

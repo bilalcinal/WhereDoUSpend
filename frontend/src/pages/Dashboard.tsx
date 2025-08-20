@@ -15,12 +15,19 @@ export default function Dashboard() {
 
   useEffect(() => {
     const load = async () => {
-      const [sum, cf] = await Promise.all([
-        reportsApi.summary(year, month),
-        reportsApi.cashflow(from, to, 'day'),
-      ]);
-      setSummary(sum);
-      setCashflow(cf);
+      try {
+        const [sum, cf] = await Promise.all([
+          reportsApi.summary(year, month),
+          reportsApi.cashflow(from, to, 'day'),
+        ]);
+        setSummary(sum);
+        setCashflow(cf);
+      } catch (e) {
+        setSummary([]);
+        setCashflow([]);
+        // Optionally log
+        console.warn('Failed to load dashboard data', e);
+      }
     };
     load();
   }, []);
@@ -34,7 +41,7 @@ export default function Dashboard() {
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
             <Pie data={expenseData} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent = 0 }) => `${name} ${(percent * 100).toFixed(0)}%`}>
-              {expenseData.map((entry, index) => (
+              {expenseData.map((_, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
