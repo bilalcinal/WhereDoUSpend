@@ -2,6 +2,12 @@ using System.Text;
 using FinanceTracker.Api.Extensions;
 using FinanceTracker.Application.Categories;
 using FinanceTracker.Application.Auth;
+using FinanceTracker.Application.Accounts;
+using FinanceTracker.Application.Transactions;
+using FinanceTracker.Application.Tags;
+using FinanceTracker.Application.Budgets;
+using FinanceTracker.Application.Recurring;
+using FinanceTracker.Application.Reports;
 using FinanceTracker.Domain;
 using FinanceTracker.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -92,6 +98,11 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddPersistence();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<ITagService, TagService>();
+builder.Services.AddScoped<IBudgetService, BudgetService>();
+builder.Services.AddScoped<IRecurringService, RecurringService>();
+builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddScoped<IAuthService, FinanceTracker.Infrastructure.Auth.AuthService>();
 
 var app = builder.Build();
