@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceTracker.Domain", "Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceTracker.Infrastructure", "FinanceTracker.Infrastructure\FinanceTracker.Infrastructure.csproj", "{2CEAFE5D-B36B-4DED-A670-F4340149D4C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceTracker.Application", "FinanceTracker.Application\FinanceTracker.Application.csproj", "{FA7F522D-5D8C-4B40-992A-C965EDE181FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{2CEAFE5D-B36B-4DED-A670-F4340149D4C6}.Release|x64.Build.0 = Release|Any CPU
 		{2CEAFE5D-B36B-4DED-A670-F4340149D4C6}.Release|x86.ActiveCfg = Release|Any CPU
 		{2CEAFE5D-B36B-4DED-A670-F4340149D4C6}.Release|x86.Build.0 = Release|Any CPU
+		{FA7F522D-5D8C-4B40-992A-C965EDE181FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA7F522D-5D8C-4B40-992A-C965EDE181FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA7F522D-5D8C-4B40-992A-C965EDE181FE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FA7F522D-5D8C-4B40-992A-C965EDE181FE}.Debug|x64.Build.0 = Debug|Any CPU
+		{FA7F522D-5D8C-4B40-992A-C965EDE181FE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FA7F522D-5D8C-4B40-992A-C965EDE181FE}.Debug|x86.Build.0 = Debug|Any CPU
+		{FA7F522D-5D8C-4B40-992A-C965EDE181FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA7F522D-5D8C-4B40-992A-C965EDE181FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA7F522D-5D8C-4B40-992A-C965EDE181FE}.Release|x64.ActiveCfg = Release|Any CPU
+		{FA7F522D-5D8C-4B40-992A-C965EDE181FE}.Release|x64.Build.0 = Release|Any CPU
+		{FA7F522D-5D8C-4B40-992A-C965EDE181FE}.Release|x86.ActiveCfg = Release|Any CPU
+		{FA7F522D-5D8C-4B40-992A-C965EDE181FE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
