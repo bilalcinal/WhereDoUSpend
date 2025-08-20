@@ -25,8 +25,15 @@ public class AuthController : ControllerBase
     [AllowAnonymous]
     public async Task<ActionResult<TokenResponse>> Login([FromBody] LoginDto dto, CancellationToken ct)
     {
-        var tokens = await _auth.LoginAsync(dto.Email, dto.Password, ct);
-        return Ok(tokens);
+        try
+        {
+            var tokens = await _auth.LoginAsync(dto.Email, dto.Password, ct);
+            return Ok(tokens);
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return Unauthorized();
+        }
     }
 
     [HttpPost("refresh")]

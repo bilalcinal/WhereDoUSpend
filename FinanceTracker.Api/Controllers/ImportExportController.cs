@@ -18,9 +18,11 @@ public class ImportExportController : ControllerBase
     private string UserId => User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;
 
     [HttpPost("import/transactions")]
+    [Consumes("multipart/form-data")]
     [RequestSizeLimit(10_000_000)]
-    public async Task<IActionResult> Import([FromForm] IFormFile file, CancellationToken ct)
+    public async Task<IActionResult> Import([FromForm] FinanceTracker.Api.Models.ImportTransactionsRequest model, CancellationToken ct)
     {
+        var file = model.File;
         if (file == null || file.Length == 0) return BadRequest("file required");
         using var stream = file.OpenReadStream();
         using var reader = new StreamReader(stream);

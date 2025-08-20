@@ -13,8 +13,10 @@ using FinanceTracker.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -73,6 +75,9 @@ builder.Services.AddCors(options =>
 // Controllers
 builder.Services.AddControllers();
 builder.Services.AddAppValidation();
+
+// Seed demo data on startup (dev only)
+builder.Services.AddHostedService<FinanceTracker.Api.DevSeederHostedService>();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
