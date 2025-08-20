@@ -72,6 +72,7 @@ builder.Services.AddCors(options =>
 
 // Controllers
 builder.Services.AddControllers();
+builder.Services.AddAppValidation();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
