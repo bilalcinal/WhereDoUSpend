@@ -50,16 +50,16 @@ public class ReportService : IReportService
         if (groupBy == "month")
         {
             return await query
-                .GroupBy(t => new DateTime(t.Date.Year, t.Date.Month, 1))
-                .Select(g => new CashflowItem(g.Key, g.Sum(x => x.Type == TransactionType.Income ? x.Amount : -x.Amount)))
+                .GroupBy(t => new { t.Date.Year, t.Date.Month })
+                .Select(g => new CashflowItem(new DateTime(g.Key.Year, g.Key.Month, 1), g.Sum(x => x.Type == TransactionType.Income ? x.Amount : -x.Amount)))
                 .OrderBy(x => x.Period)
                 .ToListAsync(ct);
         }
         else
         {
             return await query
-                .GroupBy(t => t.Date.Date)
-                .Select(g => new CashflowItem(g.Key, g.Sum(x => x.Type == TransactionType.Income ? x.Amount : -x.Amount)))
+                .GroupBy(t => new { t.Date.Year, t.Date.Month, t.Date.Day })
+                .Select(g => new CashflowItem(new DateTime(g.Key.Year, g.Key.Month, g.Key.Day), g.Sum(x => x.Type == TransactionType.Income ? x.Amount : -x.Amount)))
                 .OrderBy(x => x.Period)
                 .ToListAsync(ct);
         }
